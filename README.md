@@ -17,6 +17,8 @@ After install:
    ```
    $ git clone https://github.com/erikdubois/plankthemes.git
    ```
+   Plank settings (i.e. placement of icons) should be placed in .config folder
+
 5. Themes and icons to install from xfce themes site:
    - [qogir light](https://www.xfce-look.org/p/1230631/)
    - [tela blue](https://www.xfce-look.org/p/1279924/)
@@ -28,10 +30,20 @@ After install:
    $ sudo dnf remove xscreensaver-base
    $ xfconf-query -c xfce4-session -p /general/LockCommand -s "light-locker-command -l" --create -t string
    ```
-7. Rofi - see rofi folder.  Script to go into ```.config/rofi/config.rasi```.  Keyboard shortcut is ```rofi -combi-modi window,drun -show combi -modi combi```
+7. Rofi:  see rofi folder.  Script to go into ```.config/rofi/config.rasi```.  Keyboard shortcut is ```rofi -combi-modi window,drun -show combi -modi combi```
 
 8. [Wallpapers](https://drive.google.com/drive/folders/1pYbUg8BJSaZeqtZjX1ehHKiqr3IuTfLu?usp=sharing)
+   
+9. Installing virtualbox using these [instructions](https://computingforgeeks.com/how-to-install-vagrant-and-virtualbox-on-fedora/):
+    ```
+    $ sudo dnf -y install wget
+    $ wget http://download.virtualbox.org/virtualbox/rpm/fedora/virtualbox.repo
+    $ sudo mv virtualbox.repo /etc/yum.repos.d/virtualbox.repo
+    $ sudo dnf install -y gcc binutils make glibc-devel patch libgomp glibc-headers  kernel-headers kernel-devel-`uname -r` dkms
+    $ sudo dnf install -y VirtualBox-6.1
+    $ sudo usermod -a -G vboxusers ${USER}
+    $ sudo /usr/lib/virtualbox/vboxdrv.sh setup
 
-9. Remove unneeded applications:
+10. Remove some default applications:
     ```
     $ sudo dnf remove pidgin parole
