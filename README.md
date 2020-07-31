@@ -29,3 +29,5 @@ $ git clone https://github.com/erikdubois/plankthemes.git
    $ xfconf-query -c xfce4-session -p /general/LockCommand -s "light-locker-command -l" --create -t string
    ```
 7. Rofi - see rofi folder.  Script to go into ```.config/rofi/config.rasi```.  Keyboard shortcut is ```rofi -combi-modi window,drun -show combi -modi combi```
+
+8. [Wallpapers](https://drive.google.com/drive/folders/1pYbUg8BJSaZeqtZjX1ehHKiqr3IuTfLu?usp=sharing)
