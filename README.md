@@ -9,7 +9,7 @@ $ sudo dnf update
 $ sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 $ sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 $ sudo hostnamectl set-hostname zen
-$ sudo dnf install gimp vlc gcolor3 inkscape geany hugo htop plank dconf-editor git slick-greeter
+$ sudo dnf install gimp vlc gcolor3 inkscape geany hugo htop plank dconf-editor git slick-greeter spacefm rofi
 ```
 2. Install [chrome](https://www.google.com/chrome/)
 3. Install [Visual Studio Code](https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions)
@@ -28,3 +28,4 @@ $ git clone https://github.com/erikdubois/plankthemes.git
    $ sudo dnf remove xscreensaver-base
    $ xfconf-query -c xfce4-session -p /general/LockCommand -s "light-locker-command -l" --create -t string
    ```
+7. Rofi - see rofi folder.  Script to go into ```.config/rofi/config.rasi```.  Keyboard shortcut is ```rofi -combi-modi window,drun -show combi -modi combi```
