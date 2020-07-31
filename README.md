@@ -21,3 +21,10 @@ $ git clone https://github.com/erikdubois/plankthemes.git
    - [qogir light](https://www.xfce-look.org/p/1230631/)
    - [tela blue](https://www.xfce-look.org/p/1279924/)
    - [dots theme](https://www.xfce-look.org/p/1151531/)
+
+6. Procedure for installing light-locker and then replacing the default 'xscreensaver'
+   ```
+   $ sudo dnf install light-locker
+   $ sudo dnf remove xscreensaver-base
+   $ xfconf-query -c xfce4-session -p /general/LockCommand -s "light-locker-command -l" --create -t string
+   ```
