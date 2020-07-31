@@ -9,11 +9,15 @@ $ sudo dnf update
 $ sudo rpm -Uvh http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
 $ sudo rpm -Uvh http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 $ sudo hostnamectl set-hostname zen
-$ sudo dnf install gimp vlc gcolor3 inkscape geany hugo htop plank dconf-editor gits
+$ sudo dnf install gimp vlc gcolor3 inkscape geany hugo htop plank dconf-editor git slick-greeter
 ```
 2. Install [chrome](https://www.google.com/chrome/)
 3. Install [Visual Studio Code](https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions)
-4. Install plank themes from Eric Dubois github [repository](https://github.com/erikdubois/plankthemes). Place in .local/share/plank/themes.  Plank theme in image is 'shade'
+4. Install plank themes from Eric Dubois github [repository](https://github.com/erikdubois/plankthemes). Place in .local/share/plank/themes.  Plank theme in above image is 'shade'
 ```
 $ git clone https://github.com/erikdubois/plankthemes.git
 ```
+5. Themes and icons to install from xfce themes site:
+   - [qogir light](https://www.xfce-look.org/p/1230631/)
+   - [tela blue](https://www.xfce-look.org/p/1279924/)
+   - [dots theme](https://www.xfce-look.org/p/1151531/)
