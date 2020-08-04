@@ -2,7 +2,7 @@
 ## Fedora 32 (xfce)
 ![fedora-32-dsektop](https://i.imgur.com/ZtkFzdJ.png)
 
-After install:
+After installing:
 1. In terminal:
    ```
    $ sudo dnf update
