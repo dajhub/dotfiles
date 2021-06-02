@@ -5,7 +5,7 @@
 
 Includes rofi.  Link to [dotfiles](https://github.com/dajhub/dotfiles/tree/master/qtile)
 
-Used [Endeavour OS](https://endeavouros.com/) and installed Budgie desktop before installing [qtile](http://www.qtile.org/)
+Used [Endeavour OS](https://endeavouros.com/) as the base Arch install (so much easier!) and installed Budgie desktop before installing [qtile](http://www.qtile.org/).  Rather than Budgie I could (or should?) have installed xfce.  However, I also wanted to experiment with Budgie. The installation of Budgie also installed Gnome 40... so lot's to play with!!!
 
 ## Fedora 32 (xfce)
 ![fedora-32-desktop](https://i.imgur.com/ZtkFzdJ.png)
