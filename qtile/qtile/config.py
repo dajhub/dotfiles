@@ -50,26 +50,49 @@ from libqtile import hook
 mod = "mod4"
 alt = "mod1"
 terminal = guess_terminal()
+#browser = "firefox"
 
 keys = [
     # Rofi
-    Key([mod], "space", lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 10' -show combi -icon-theme 'Papirus' -show-icons")),
+        Key([mod], "space", 
+            lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi -icon-theme 'Papirus' -show-icons")
+            ),
+    
+    # Some app shortcuts
 
+     #   Key([mod], "b", lazy.function(check_if_running(browser)), lazy.group["1"].toscreen(toggle=False)),
+    
     # Lock Screen
-    Key([mod],"l", lazy.spawn("betterlockscreen -l")),
+        Key([mod],"l", 
+            lazy.spawn("betterlockscreen -l")
+            ),
 
     # Volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 2%+")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 2%-")),
-    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle")),
+        Key([], "XF86AudioRaiseVolume", 
+            lazy.spawn("amixer -D pulse sset Master 2%+")
+            ),
+        Key([], "XF86AudioLowerVolume", 
+            lazy.spawn("amixer -D pulse sset Master 2%-")
+            ),
+        Key([], "XF86AudioMute", 
+            lazy.spawn("amixer -D pulse sset Master toggle")
+            ),
 
     # Brightness
-    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 1%+")),
-    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 1%-")),
+        Key([], "XF86MonBrightnessUp", 
+            lazy.spawn("brightnessctl set 1%+")
+            ),
+        Key([], "XF86MonBrightnessDown", 
+            lazy.spawn("brightnessctl set 1%-")
+            ),
 
     # Nightlight
-    Key([mod], "n", lazy.spawn("redshift -P -O 5000")),
-    Key([mod, "shift"], "n", lazy.spawn("redshift -x")),
+        Key([mod], "n", 
+            lazy.spawn("redshift -P -O 5000")
+            ),
+        Key([mod, "shift"], "n", 
+            lazy.spawn("redshift -x")
+            ),
 
     # Switch between windows
     Key([mod], "Tab", lazy.layout.down(), desc="Move focus down"),
@@ -78,33 +101,117 @@ keys = [
 
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod], "Right", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
+        Key([mod], "Left", 
+            lazy.layout.shuffle_left(), 
+            desc="Move window to the left"
+            ),
+        Key([mod], "Right", 
+            lazy.layout.shuffle_right(), 
+            desc="Move window to the right"
+            ),
+        Key([mod], "Down", 
+            lazy.layout.shuffle_down(), 
+            desc="Move window down"
+            ),
+        Key([mod], "Up", 
+            lazy.layout.shuffle_up(), 
+            desc="Move window up"
+            ),
 
 
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
-    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    #Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    ### Window controls
+        Key([mod], "j",
+             lazy.layout.down(),
+             desc='Move focus down in current stack pane'
+             ),
+        Key([mod], "k",
+             lazy.layout.up(),
+             desc='Move focus up in current stack pane'
+             ),
+        Key([mod, "shift"], "j",
+             lazy.layout.shuffle_down(),
+             lazy.layout.section_down(),
+             desc='Move windows down in current stack'
+             ),
+        Key([mod, "shift"], "k",
+             lazy.layout.shuffle_up(),
+             lazy.layout.section_up(),
+             desc='Move windows up in current stack'
+             ),
+        Key([mod], "h",
+             lazy.layout.shrink(),
+             lazy.layout.decrease_nmaster(),
+             desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
+             ),
+        Key([mod], "l",
+             lazy.layout.grow(),
+             lazy.layout.increase_nmaster(),
+             desc='Expand window (MonadTall), increase number in master pane (Tile)'
+             ),
+        Key([mod], "n",
+             lazy.layout.normalize(),
+             desc='normalize window size ratios'
+             ),
+        Key([mod], "m",
+             lazy.layout.maximize(),
+             desc='toggle window between minimum and maximum sizes'
+             ),
+        Key([mod, "shift"], "f",
+             lazy.window.toggle_floating(),
+             desc='toggle floating'
+             ),
+        Key([mod], "f",
+             lazy.window.toggle_fullscreen(),
+             desc='toggle fullscreen'
+             ),
 
+    # Grow/shrink windows
+
+        Key([mod, "control"], "Left", 
+            lazy.layout.shrink(),
+            lazy.layout.grow_left(),
+            lazy.layout.increase_nmaster()
+            ),
+        Key([mod, "control"], "Right", 
+            lazy.layout.grow(),
+            lazy.layout.grow_right(),
+            lazy.layout.decrease_nmaster()
+            ),
+        Key([mod, "control"], "Down", 
+            lazy.layout.grow_down()
+            ),
+        Key([mod, "control"], "Up", 
+            lazy.layout.grow_up()
+            ),
 
     # Launch terminal
-    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+        Key([mod], "Return", 
+            lazy.spawn(terminal), 
+            desc="Launch terminal"
+            ),
 
 
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-
-    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(),
-        desc="Spawn a command using a prompt widget"),
+        Key([mod], "Tab", 
+            lazy.next_layout(), 
+            desc="Toggle between layouts"
+            ),
+        Key([mod], "w", 
+            lazy.window.kill(), 
+            desc="Kill focused window"
+            ),
+        Key([mod, "control"], "r", 
+            lazy.restart(), 
+            desc="Restart Qtile"
+            ),
+        Key([mod, "control"], "q", 
+            lazy.shutdown(), 
+            desc="Shutdown Qtile"
+            ),
+        Key([mod], "r", 
+            lazy.spawncmd(),
+            desc="Spawn a command using a prompt widget"
+            ),
 ]
 
 groups = [Group(i) for i in "12345"]
@@ -239,7 +346,7 @@ screens = [
                     foreground="eceff4"
                 ),
                 widget.TextBox(
-                    text="     ",
+                    text="     ",
                     font="SF Pro Display",
                     fontsize=13,
                     foreground="b48ead"
