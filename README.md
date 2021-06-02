@@ -1,6 +1,14 @@
 # dotfiles
+
+## Qtile (on Arch)
+![qtile-desktop](https://i.imgur.com/ezZf3du.png)
+
+Includes rofi.  Link to [dotfiles](https://github.com/dajhub/dotfiles/tree/master/qtile)
+
+Used [Endeavour OS](https://endeavouros.com/) and installed Budgie desktop before installing [qtile](http://www.qtile.org/)
+
 ## Fedora 32 (xfce)
-![fedora-32-dsektop](https://i.imgur.com/ZtkFzdJ.png)
+![fedora-32-desktop](https://i.imgur.com/ZtkFzdJ.png)
 
 After installing:
 1. In terminal:
