@@ -46,11 +46,10 @@ from libqtile import hook
  #   subprocess.Popen([home + '/.config/qtile/brightness.sh'])
 
 
-
 mod = "mod4"
 alt = "mod1"
-terminal = guess_terminal()
-#browser = "firefox"
+# terminal = guess_terminal()
+terminal = "alacritty"
 
 keys = [
     # Rofi
@@ -60,12 +59,18 @@ keys = [
     
     # Some app shortcuts
 
-     #   Key([mod], "b", lazy.function(check_if_running(browser)), lazy.group["1"].toscreen(toggle=False)),
+        Key([mod], "b", 
+            lazy.spawn("firefox")
+            ),
+    #    Key([mod], "m", 
+    #        lazy.spawn("nautilus")
+    #        ),
+
     
     # Lock Screen
-        Key([mod],"l", 
-            lazy.spawn("betterlockscreen -l")
-            ),
+    #    Key([mod],"l", 
+    #        lazy.spawn("betterlockscreen -l")
+    #        ),
 
     # Volume
         Key([], "XF86AudioRaiseVolume", 
@@ -87,12 +92,12 @@ keys = [
             ),
 
     # Nightlight
-        Key([mod], "n", 
-            lazy.spawn("redshift -P -O 5000")
-            ),
-        Key([mod, "shift"], "n", 
-            lazy.spawn("redshift -x")
-            ),
+    #    Key([mod], "n", 
+    #        lazy.spawn("redshift -P -O 5000")
+    #        ),
+    #    Key([mod, "shift"], "n", 
+    #        lazy.spawn("redshift -x")
+    #        ),
 
     # Switch between windows
     Key([mod], "Tab", lazy.layout.down(), desc="Move focus down"),
@@ -184,6 +189,12 @@ keys = [
             lazy.layout.grow_up()
             ),
 
+    # Move between groups (added by DJ - not working at the moment)
+        # cycle to previous group
+    	Key([alt], "Left", lazy.group.prevgroup()),
+    	# cycle to next group
+    	Key([alt], "Right", lazy.group.nextgroup()),
+    	
     # Launch terminal
         Key([mod], "Return", 
             lazy.spawn(terminal), 
@@ -238,16 +249,16 @@ layout_theme = {"border_width":1,
 
 layouts = [
     #layout.Columns(border_focus_stack='#d75f5f'),
-    # layout.Max(),
+    layout.Max(),
     # Try more layouts by unleashing below layouts.
-    layout.Stack(num_stacks=2),
+    # layout.Stack(num_stacks=2),
     # layout.Bsp(),
-    # layout.Matrix(),
+    layout.Matrix(),
     layout.MonadTall(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
-    layout.Tile(),
-    layout.TreeTab(),
+    # layout.Tile(),
+    # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
     layout.Floating(**layout_theme),
@@ -266,6 +277,12 @@ screens = [
         wallpaper_mode='fill',
         top=bar.Bar(
             [
+                widget.CurrentLayoutIcon(
+                    custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+                    scale = 0.7,
+                    padding = 5
+                ),
+
                 widget.GroupBox(
                     font="SF Pro Display",
                     fontsize=12,
@@ -313,6 +330,26 @@ screens = [
 #                    foreground="eceff4",
 #                    format="CPU {load_percent}%"
 #                ),
+                    widget.TextBox(
+                    text="    ⟳",
+                    font="SF Pro Display",
+                    fontsize=13,
+                    foreground="d08770"
+                ),
+
+                widget.CheckUpdates(
+                    distro = "Arch_checkupdates",
+                    display_format = "{updates} Updates",
+                    no_update_string = '0 Updates',
+                    restart_indicator = 'Checking...',
+                    font="SF Pro Display",
+                    fontsize=13,
+                    #foreground = "88c0d0",
+                    colour_have_updates = "d08770",
+                    #colour_no_updates = "d08770",
+                    update_interval = 3000
+                 ),
+
                 widget.TextBox(
                     text="    ",
                     font="SF Pro Display",
@@ -346,7 +383,7 @@ screens = [
                     foreground="eceff4"
                 ),
                 widget.TextBox(
-                    text="     ",
+                    text="     ",
                     font="SF Pro Display",
                     fontsize=13,
                     foreground="b48ead"
