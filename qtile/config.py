@@ -48,182 +48,91 @@ from libqtile import hook
 
 mod = "mod4"
 alt = "mod1"
-# terminal = guess_terminal()
-terminal = "alacritty"
+terminal = "alacritty" # original: guess_terminal()
+
+#############################################
+############ SHORTCUTS ######################
+#############################################
 
 keys = [
-    # Rofi
-        Key([mod], "space", 
-            lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi -icon-theme 'Papirus' -show-icons")
-            ),
+# Applications    
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([alt], "space", lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi -icon-theme 'Papirus' -show-icons")),
+    Key([alt], "b", lazy.spawn("firefox")),
+    Key([alt], "n", lazy.spawn("nautilus")),
+    Key([alt], "s", lazy.spawn("subl")),
     
-    # Some app shortcuts
+# Lock Screen
+    #Key([mod],"l", lazy.spawn("betterlockscreen -l")),
 
-        Key([mod], "b", 
-            lazy.spawn("firefox")
-            ),
-    #    Key([mod], "m", 
-    #        lazy.spawn("nautilus")
-    #        ),
+##################################################
+######### MEDIA & BRIGHTNESS CONTROLS ############
+##################################################
+# Volume
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 2%+")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 2%-")),
+    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse sset Master toggle")),
+
+# Brightness
+    Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 1%+")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 1%-")),
+
+# Nightlight
+    #Key([mod], "n", lazy.spawn("redshift -P -O 5000")),
+    #Key([mod, "shift"], "n", lazy.spawn("redshift -x")),
 
     
-    # Lock Screen
-    #    Key([mod],"l", 
-    #        lazy.spawn("betterlockscreen -l")
-    #        ),
 
-    # Volume
-        Key([], "XF86AudioRaiseVolume", 
-            lazy.spawn("amixer -D pulse sset Master 2%+")
-            ),
-        Key([], "XF86AudioLowerVolume", 
-            lazy.spawn("amixer -D pulse sset Master 2%-")
-            ),
-        Key([], "XF86AudioMute", 
-            lazy.spawn("amixer -D pulse sset Master toggle")
-            ),
+    # Switch between windows in current stack pane
+###################################################
+################  SWITCH LAYOUT ###################
+###################################################
 
-    # Brightness
-        Key([], "XF86MonBrightnessUp", 
-            lazy.spawn("brightnessctl set 1%+")
-            ),
-        Key([], "XF86MonBrightnessDown", 
-            lazy.spawn("brightnessctl set 1%-")
-            ),
 
-    # Nightlight
-    #    Key([mod], "n", 
-    #        lazy.spawn("redshift -P -O 5000")
-    #        ),
-    #    Key([mod, "shift"], "n", 
-    #        lazy.spawn("redshift -x")
-    #        ),
-
-    # Switch between windows
+# Switch between windows
     Key([mod], "Tab", lazy.layout.down(), desc="Move focus down"),
     Key([mod, "shift"], "Tab", lazy.layout.up(), desc="Move focus up"),
 
 
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-        Key([mod], "Left", 
-            lazy.layout.shuffle_left(), 
-            desc="Move window to the left"
-            ),
-        Key([mod], "Right", 
-            lazy.layout.shuffle_right(), 
-            desc="Move window to the right"
-            ),
-        Key([mod], "Down", 
-            lazy.layout.shuffle_down(), 
-            desc="Move window down"
-            ),
-        Key([mod], "Up", 
-            lazy.layout.shuffle_up(), 
-            desc="Move window up"
-            ),
+# Move windows up or down in Monadtall/Layout-Tall
+    Key([mod], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod], "Right", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
 
 
-    ### Window controls
-        Key([mod], "j",
-             lazy.layout.down(),
-             desc='Move focus down in current stack pane'
-             ),
-        Key([mod], "k",
-             lazy.layout.up(),
-             desc='Move focus up in current stack pane'
-             ),
-        Key([mod, "shift"], "j",
-             lazy.layout.shuffle_down(),
-             lazy.layout.section_down(),
-             desc='Move windows down in current stack'
-             ),
-        Key([mod, "shift"], "k",
-             lazy.layout.shuffle_up(),
-             lazy.layout.section_up(),
-             desc='Move windows up in current stack'
-             ),
-        Key([mod], "h",
-             lazy.layout.shrink(),
-             lazy.layout.decrease_nmaster(),
-             desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
-             ),
-        Key([mod], "l",
-             lazy.layout.grow(),
-             lazy.layout.increase_nmaster(),
-             desc='Expand window (MonadTall), increase number in master pane (Tile)'
-             ),
-        Key([mod], "n",
-             lazy.layout.normalize(),
-             desc='normalize window size ratios'
-             ),
-        Key([mod], "m",
-             lazy.layout.maximize(),
-             desc='toggle window between minimum and maximum sizes'
-             ),
-        Key([mod, "shift"], "f",
-             lazy.window.toggle_floating(),
-             desc='toggle floating'
-             ),
-        Key([mod], "f",
-             lazy.window.toggle_fullscreen(),
-             desc='toggle fullscreen'
-             ),
+# Window controls - change focus & grow/shrink windows
+    Key([mod], "j", lazy.layout.down(), desc='Move focus down in current stack pane'),
+    Key([mod], "k", lazy.layout.up(), desc='Move focus up in current stack pane'),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), lazy.layout.section_down(), desc='Move windows down in current stack'),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), lazy.layout.section_up(), desc='Move windows up in current stack'),
+    Key([mod], "h", lazy.layout.shrink(), lazy.layout.decrease_nmaster(), desc='Shrink window (MonadTall), decrease number in master pane (Tile)'),
+    Key([mod], "l", lazy.layout.grow(), lazy.layout.increase_nmaster(), desc='Expand window (MonadTall), increase number in master pane (Tile)'),
+    Key([mod], "n", lazy.layout.normalize(), desc='normalize window size ratios'),
+    Key([mod], "m", lazy.layout.maximize(), desc='toggle window between minimum and maximum sizes'),
+    Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc='toggle floating'),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
 
-    # Grow/shrink windows
 
-        Key([mod, "control"], "Left", 
-            lazy.layout.shrink(),
-            lazy.layout.grow_left(),
-            lazy.layout.increase_nmaster()
-            ),
-        Key([mod, "control"], "Right", 
-            lazy.layout.grow(),
-            lazy.layout.grow_right(),
-            lazy.layout.decrease_nmaster()
-            ),
-        Key([mod, "control"], "Down", 
-            lazy.layout.grow_down()
-            ),
-        Key([mod, "control"], "Up", 
-            lazy.layout.grow_up()
-            ),
-
-    # Move between groups (added by DJ - not working at the moment)
-        # cycle to previous group
-    	Key([alt], "Left", lazy.group.prevgroup()),
-    	# cycle to next group
-    	Key([alt], "Right", lazy.group.nextgroup()),
+# Move between groups (added by DJ - not working at the moment)
+# cycle to previous group
+    Key([alt], "Left", lazy.group.prevgroup()),
+# cycle to next group
+    Key([alt], "Right", lazy.group.nextgroup()),
     	
-    # Launch terminal
-        Key([mod], "Return", 
-            lazy.spawn(terminal), 
-            desc="Launch terminal"
-            ),
 
-
-    # Toggle between different layouts as defined below
-        Key([mod], "Tab", 
-            lazy.next_layout(), 
-            desc="Toggle between layouts"
-            ),
-        Key([mod], "w", 
-            lazy.window.kill(), 
-            desc="Kill focused window"
-            ),
-        Key([mod, "control"], "r", 
-            lazy.restart(), 
-            desc="Restart Qtile"
-            ),
-        Key([mod, "control"], "q", 
-            lazy.shutdown(), 
-            desc="Shutdown Qtile"
-            ),
-        Key([mod], "r", 
-            lazy.spawncmd(),
-            desc="Spawn a command using a prompt widget"
-            ),
+# Toggle between different layouts as defined below
+    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
 ]
+
+
+###################################################
+####################   LAYOUTS ####################
+###################################################
 
 groups = [Group(i) for i in "12345"]
 
@@ -249,20 +158,24 @@ layout_theme = {"border_width":1,
 
 layouts = [
     #layout.Columns(border_focus_stack='#d75f5f'),
-    layout.Max(),
+    layout.Max(**layout_theme),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
-    layout.Matrix(),
+    layout.Matrix(**layout_theme),
     layout.MonadTall(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
-    # layout.Tile(),
+    layout.Tile(**layout_theme),
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
     layout.Floating(**layout_theme),
 ]
+
+###################################################
+##############  WIDGETS & SCREENS #################
+###################################################
 
 widget_defaults = dict(
     font='sans',
@@ -273,7 +186,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper='~/Pictures/wallpapers/nord-mountains.jpg',
+        wallpaper='~/Pictures/wallpapers/space-station.png',
         wallpaper_mode='fill',
         top=bar.Bar(
             [
@@ -286,7 +199,9 @@ screens = [
                 widget.GroupBox(
                     font="SF Pro Display",
                     fontsize=12,
-                    highlight_method="block",
+                    highlight_method="line", # could also be 'block'
+                    #highlight_color="2e3440",
+                    highlight_color = ['#202020', '#343434'],
                     rounded=False,
                     padding_x=5,
                     padding_y=5,
