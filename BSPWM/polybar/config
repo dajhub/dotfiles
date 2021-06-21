@@ -66,6 +66,7 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10
+font-4 = "Iosevka Nerd Font:size=10;3"
 
 modules-left = bspwm
 modules-center = mpd date
@@ -240,7 +241,7 @@ card = intel_backlight
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "  "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
 ;format-underline = #4bffdc
 label = %gb_used% / %gb_total%
@@ -314,17 +315,17 @@ format-volume = <label-volume> <bar-volume>
 label-volume =   %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted =  muted
+label-muted = 婢  muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
+bar-volume-foreground-0 = #689d6a
+bar-volume-foreground-1 = #689d6a
+bar-volume-foreground-2 = #689d6a
+bar-volume-foreground-3 = #689d6a
+bar-volume-foreground-4 = #689d6a
+bar-volume-foreground-5 = #fe8019
+bar-volume-foreground-6 = #cc241d
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
@@ -367,37 +368,45 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
+
+full-at = 99
+
 battery = BAT0
 adapter = ADP1
-full-at = 98
+
+poll-interval = 2
+time-format = %H:%M
 
 format-charging = <animation-charging> <label-charging>
-label-charging =  %percentage%%
-;format-charging-underline = #ffb52a
+format-charging-prefix = 
 
-format-discharging = <animation-discharging> <label-discharging>
-label-discharging =  %percentage%%
-;format-discharging-underline = ${self.format-charging-underline}
+format-discharging = <ramp-capacity> <label-discharging>
+
+format-full = <label-full>
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-;format-full-underline = ${self.format-charging-underline}
+format-full-prefix-font = 2
+format-full-prefix-foreground = ${color.RED}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = %percentage%%
 
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-font = 2
+ramp-capacity-foreground = ${color.YELLOW}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-font = 2
+animation-charging-foreground = ${color.GREEN}
 animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 #--------------------------------temperature----------------------------
 
