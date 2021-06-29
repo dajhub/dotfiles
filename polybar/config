@@ -22,14 +22,25 @@
 
 [colors]
 ; Gruvbox theme ============ cream color font
-background = #222
-background-alt = #444
-foreground = #ebdbb2
+;background = #222
+;background-alt = #444
+;foreground = #ebdbb2
+;foreground-alt = #555
+;primary = #fe8019
+;secondary = #e60053
+;alert = #bd2c40
+; ============
+
+; Nord theme
+background = #2e3440
+background-alt = #3b4252
+foreground = #e5e9f0
 foreground-alt = #555
-primary = #fe8019
-secondary = #e60053
+primary = #d08770
+secondary = #bf616a
 alert = #bd2c40
 ; ============
+
 
 
 #########################################################################
@@ -67,7 +78,7 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10
 font-4 = "Iosevka Nerd Font:size=10;3"
 
-modules-left = bspwm
+modules-left = i3 bspwm
 modules-center = mpd date
 modules-right = updates filesystem xbacklight updates-ubuntu alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature powermenu
 
@@ -76,7 +87,7 @@ tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
-;wm-restack = i3
+wm-restack = i3 bspwm
 
 ;override-redirect = true
 
@@ -142,6 +153,7 @@ label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
+
 label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
@@ -156,7 +168,7 @@ index-sort = true
 wrapping-scroll = false
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
 label-mode-foreground = #000
@@ -244,8 +256,10 @@ format-prefix = "  "
 ;format-prefix-foreground = ${colors.foreground}
 ;format-underline = #4bffdc
 label = %gb_used% / %gb_total%
-format-foreground = #83a598
-format-prefix-foreground = #83a598
+;format-foreground = #83a598 --gruvbox
+;format-prefix-foreground = #83a598 --gruvbox
+format-foreground = #ebcb8b
+format-prefix-foreground = #ebcb8b
 
 #---------------------------------wlan------------------------------
 
@@ -297,7 +311,8 @@ interval = 5
 
 date =   %a %d %B |
 ;date-alt = " %Y-%m-%d"
-format-foreground = #689d6a
+;format-foreground = #689d6a ---gruvbox
+format-foreground = #a3be8c
 time = %H:%M
 ;time-alt = %H:%M
 
@@ -386,11 +401,15 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-full = <label-full>
 format-full-prefix = " "
 format-full-prefix-font = 2
-format-full-prefix-foreground = ${color.RED}
+;format-full-prefix-foreground = ${color.RED}
+format-full-prefix-foreground = #5e81ac
 
 label-charging = %percentage%%
+label-charging-foreground = #a3be8c
 label-discharging = %percentage%%
+label-discharging-foreground = #88c0d0
 label-full = %percentage%%
+label-full-foreground = #5e81ac
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
@@ -398,7 +417,8 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 ramp-capacity-font = 2
-ramp-capacity-foreground = ${color.YELLOW}
+;ramp-capacity-foreground = ${color.YELLOW}
+ramp-capacity-foreground = #88c0d0
 
 animation-charging-0 = 
 animation-charging-1 = 
@@ -406,7 +426,8 @@ animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-font = 2
-animation-charging-foreground = ${color.GREEN}
+;animation-charging-foreground = ${color.GREEN}
+animation-charging-foreground = #a3be8c
 animation-charging-framerate = 750
 
 
@@ -440,8 +461,8 @@ exec = ~/.config/polybar/scripts/updates-ubuntu.sh
 format = <label>
 format-prefix = "  "
 ;format-prefix-foreground = ${colors.foreground}
-format-foreground = #d79921
-format-prefix-foreground = #d79921
+format-foreground = #b48ead
+format-prefix-foreground = #b48ead
 label = %output%
 interval = 600
 click-left = alacritty "sudo apt upgrade" &
