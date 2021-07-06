@@ -21,7 +21,7 @@
 #########################################################################
 
 [colors]
-; Gruvbox theme ============ cream color font
+;----- Gruvbox theme ============ cream color font
 ;background = #222
 ;background-alt = #444
 ;foreground = #ebdbb2
@@ -29,9 +29,9 @@
 ;primary = #fe8019
 ;secondary = #e60053
 ;alert = #bd2c40
-; ============
 
-; Nord theme
+
+;----- Nord theme
 background = #2e3440
 background-alt = #3b4252
 foreground = #e5e9f0
@@ -41,7 +41,43 @@ secondary = #bf616a
 alert = #bd2c40
 ; ============
 
-
+;----- General colors
+;brick=#be4a2f
+light_orange=#d77643
+;lighter_skin=#ead4aa
+;light_skin=#e4a672
+;dark_skin=#b86f50
+;darker_skin=#733e39
+;darkest_skin=#3e2731
+;dark_red=#a22633
+red=#e43b44
+orange=#f77622
+;dark_yellow=#feae34
+;yellow=#fee761
+light_green=#63c74d
+;green=#3e8948
+;dark_green=#265c42
+;darker_green=#193c3e
+;blue=#124e89
+;light_blue=#0099db
+;accent=#0099db
+cyan=#2ce8f5
+;white=#ffffff
+;base5=#c0cbdc
+;foreground_accent=#c0cbdc
+;base4=#8b9bb4
+;foreground=#8b9bb4
+;base3=#5a6988
+;base2=#3a4466
+;base1=#262b44
+;background=#262b44
+;base0=#181425
+;red2=#ff0044
+;purple=#68386c
+;magenta=#b55088
+;pink=#f6757a
+;beige=#e8b796
+;dark_beige=#c28569
 
 #########################################################################
 #                        POLYBAR CONFIGURATION                          #
@@ -76,7 +112,7 @@ font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10
-font-4 = "Iosevka Nerd Font:size=10;3"
+font-4 = "Iosevka Nerd Font:size=10;0"
 
 modules-left = i3 bspwm
 modules-center = mpd date
@@ -219,7 +255,8 @@ label-song-ellipsis = true
 type = internal/xbacklight
 
 format = <label> <bar>
-label = BL
+;label = BL
+format-prefix = "   " 
 
 bar-width = 10
 bar-indicator = |
@@ -252,10 +289,10 @@ card = intel_backlight
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "  "
+format-prefix = "   "
 ;format-prefix-foreground = ${colors.foreground}
 ;format-underline = #4bffdc
-label = %gb_used% / %gb_total%
+label = %gb_used%
 ;format-foreground = #83a598 --gruvbox
 ;format-prefix-foreground = #83a598 --gruvbox
 format-foreground = #ebcb8b
@@ -309,7 +346,7 @@ format-prefix-foreground = #ebcb8b
 type = internal/date
 interval = 5
 
-date =   %a %d %B |
+date =    %a %d %B |
 ;date-alt = " %Y-%m-%d"
 ;format-foreground = #689d6a ---gruvbox
 format-foreground = #a3be8c
@@ -328,7 +365,8 @@ label = %date% %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume =   %percentage%%
+
+label-volume =    %percentage%%
 label-volume-foreground = ${root.foreground}
 
 label-muted = 婢  muted
@@ -380,58 +418,34 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 ;bar-volume-empty-font = 2
 ;bar-volume-empty-foreground = ${colors.foreground-alt}
 
-#-----------------------------------battery--------------------------------
+
+;------------------------------
+;battery
+;------------------------------
 
 [module/battery]
-type = internal/battery
-
-full-at = 99
-
-battery = BAT0
-adapter = ADP1
-
+type=internal/battery
+battery=BAT0
+adapter=AC
 poll-interval = 2
-time-format = %H:%M
 
-format-charging = <animation-charging> <label-charging>
-format-charging-prefix = 
+label-charging= %percentage%%
+label-charging-foreground=${colors.cyan}
+ramp-capacity-0=
+ramp-capacity-1=
+ramp-capacity-2=
+ramp-capacity-3=
+ramp-capacity-4=
+ramp-capacity-5=
+format-discharging=<ramp-capacity> <label-discharging>
+format-discharging-foreground=${colors.light_orange}
+label-discharging=%percentage%%
+label-full= 100%
+label-full-foreground=${colors.light_green}
 
-format-discharging = <ramp-capacity> <label-discharging>
-
-format-full = <label-full>
-format-full-prefix = " "
-format-full-prefix-font = 2
-;format-full-prefix-foreground = ${color.RED}
-format-full-prefix-foreground = #5e81ac
-
-label-charging = %percentage%%
-label-charging-foreground = #a3be8c
-label-discharging = %percentage%%
-label-discharging-foreground = #88c0d0
-label-full = %percentage%%
-label-full-foreground = #5e81ac
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-3 = 
-ramp-capacity-4 = 
-ramp-capacity-font = 2
-;ramp-capacity-foreground = ${color.YELLOW}
-ramp-capacity-foreground = #88c0d0
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-3 = 
-animation-charging-4 = 
-animation-charging-font = 2
-;animation-charging-foreground = ${color.GREEN}
-animation-charging-foreground = #a3be8c
-animation-charging-framerate = 750
-
-
-#--------------------------------temperature----------------------------
+;------------------------------
+;temperature
+;------------------------------
 
 ;[module/temperature]
 ;type = internal/temperature
@@ -455,9 +469,9 @@ animation-charging-framerate = 750
 
 #--------------------------------updates----------------------------
 
-[module/updates-ubuntu]
+[module/updates-arch]
 type = custom/script
-exec = ~/.config/polybar/scripts/updates-ubuntu.sh
+exec = ~/.config/polybar/scripts/updates-arch.sh
 format = <label>
 format-prefix = "  "
 ;format-prefix-foreground = ${colors.foreground}
@@ -465,7 +479,7 @@ format-foreground = #b48ead
 format-prefix-foreground = #b48ead
 label = %output%
 interval = 600
-click-left = alacritty "sudo apt upgrade" &
+click-left = alacritty "sudo pacman -Syu" &
 
 
 #--------------------------------powermenu----------------------------
