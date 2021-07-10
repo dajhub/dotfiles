@@ -1,4 +1,4 @@
-[module/updates-arch]
+[module/updates]
 type = custom/script
 exec = "arch_updates -s"
 tail = true

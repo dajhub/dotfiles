@@ -16,12 +16,13 @@
 ;
 ;==========================================================
 
-#########################################################################
-#                        COLOR CONFIGURATION                            #
-#########################################################################
-
+###########################################################
+#              COLOR CONFIGURATION                 
+###########################################################
 [colors]
-;----- Gruvbox theme ============ cream color font
+;------------------------------
+;Gruvbox theme (cream color font)
+;------------------------------
 ;background = #222
 ;background-alt = #444
 ;foreground = #ebdbb2
@@ -30,18 +31,24 @@
 ;secondary = #e60053
 ;alert = #bd2c40
 
-
-;----- Nord theme
+;------------------------------
+;Nord theme - https://www.nordtheme.com
+;------------------------------
 background = #2e3440
 background-alt = #3b4252
-foreground = #e5e9f0
-foreground-alt = #555
-primary = #d08770
-secondary = #bf616a
-alert = #bd2c40
-; ============
+# foreground is text color - Frost
+foreground = #81A1C1
+# foreground-alt is nord Snow Storm (first color)
+foreground-alt = #81A1C1
+# primary is the underline in the panel (Aurora - nord yellow)
+primary = #EBCB8B
+secondary = #EBCB8B
+alert = #BF616A
 
-;----- General colors
+
+;------------------------------
+;Alternative colors
+;------------------------------
 ;brick=#be4a2f
 light_orange=#d77643
 ;lighter_skin=#ead4aa
@@ -53,7 +60,7 @@ light_orange=#d77643
 red=#e43b44
 orange=#f77622
 ;dark_yellow=#feae34
-;yellow=#fee761
+yellow=#fee761
 light_green=#63c74d
 ;green=#3e8948
 ;dark_green=#265c42
@@ -76,13 +83,12 @@ cyan=#2ce8f5
 ;purple=#68386c
 ;magenta=#b55088
 ;pink=#f6757a
-;beige=#e8b796
+beige=#e8b796
 ;dark_beige=#c28569
 
-#########################################################################
-#                        POLYBAR CONFIGURATION                          #
-#########################################################################
-
+###########################################################
+#              POLYBAR CONFIGURATION                 
+###########################################################
 
 [bar/mybar]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -108,15 +114,16 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
+;font-0 = fixed:pixelsize=10;1
+font-0 = "SF Pro Display:size=10"
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10
 font-4 = "Iosevka Nerd Font:size=10;0"
 
-modules-left = i3 bspwm
+modules-left = i3 bspwm xwindow
 modules-center = mpd date
-modules-right = updates filesystem xbacklight updates-ubuntu alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature powermenu
+modules-right = updates filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature powermenu
 
 tray-position = right
 tray-padding = 2
@@ -136,9 +143,9 @@ wm-restack = i3 bspwm
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-#########################################################################
-#                               MODULES                                 #
-#########################################################################
+###########################################################
+#                   MODULES                 
+###########################################################
 
 [module/xwindow]
 type = internal/xwindow
@@ -148,9 +155,9 @@ label = %title:0:30:...%
 ;type = internal/xkeyboard
 ;blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = ">> "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+;format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
 label-layout-underline = ${colors.secondary}
@@ -160,7 +167,9 @@ label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
 
-#--------------------------------filesystem------------------------------
+;------------------------------
+;filesystem
+;------------------------------
 
 ;[module/filesystem]
 ;type = internal/fs
@@ -172,7 +181,9 @@ label-indicator-underline = ${colors.secondary}
 ;label-unmounted = %mountpoint% not mounted
 ;label-unmounted-foreground = ${colors.foreground-alt}
 
-#----------------------------------bspwm & i3 --------------------------
+;------------------------------
+;bspwm & i3
+;------------------------------
 
 [module/bspwm]
 type = internal/bspwm
@@ -188,7 +199,6 @@ label-occupied-padding = 2
 label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
-
 
 label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
@@ -234,7 +244,9 @@ label-urgent-padding = 2
 ; Separator in between workspaces
 ; label-separator = |
 
-#-------------------------------------mpd--------------------------------
+;------------------------------
+;mpd
+;------------------------------
 
 [module/mpd]
 type = internal/mpd
@@ -249,32 +261,29 @@ icon-next = 
 label-song-maxlen = 25
 label-song-ellipsis = true
 
-#-----------------------------------backlight---------------------------
+;------------------------------
+;backlight
+;------------------------------
 
 [module/xbacklight]
-type = internal/xbacklight
+type=internal/xbacklight
+enable-scroll=true
+ramp-0=
+ramp-1=
+ramp-2=
+label=%percentage%%
+format=<ramp>  <label>
+format-foreground=${colors.yellow}
 
-format = <label> <bar>
-;label = BL
-format-prefix = "   " 
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
 
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
 
-#---------------------------------cpu--------------------------------
+;------------------------------
+;cpu
+;------------------------------
 
 ;[module/cpu]
 ;type = internal/cpu
@@ -284,7 +293,9 @@ card = intel_backlight
 ;format-underline = #f90000
 ;label = %percentage:2%%
 
-#--------------------------------memory------------------------------
+;------------------------------
+;memory
+;------------------------------
 
 [module/memory]
 type = internal/memory
@@ -298,7 +309,9 @@ label = %gb_used%
 format-foreground = #ebcb8b
 format-prefix-foreground = #ebcb8b
 
-#---------------------------------wlan------------------------------
+;------------------------------
+;wlan
+;------------------------------
 
 ;[module/wlan]
 ;type = internal/network
@@ -322,7 +335,9 @@ format-prefix-foreground = #ebcb8b
 ;ramp-signal-4 = 
 ;ramp-signal-foreground = ${colors.foreground-alt}
 
-#--------------------------------ethernet---------------------------
+;------------------------------
+;ethernet
+;------------------------------
 
 ;[module/eth]
 ;type = internal/network
@@ -340,16 +355,20 @@ format-prefix-foreground = #ebcb8b
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-#-----------------------------date & time------------------------------
+;------------------------------
+;date & time
+;------------------------------
 
 [module/date]
 type = internal/date
+label = %date% %time%
 interval = 5
 
 date =    %a %d %B |
 ;date-alt = " %Y-%m-%d"
 ;format-foreground = #689d6a ---gruvbox
 format-foreground = #a3be8c
+
 time = %H:%M
 ;time-alt = %H:%M
 
@@ -357,38 +376,29 @@ format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-underline = #0a6cf5
 
-label = %date% %time%
-
-#----------------------------------volume--------------------------
+;------------------------------
+;volume
+;------------------------------
 
 [module/pulseaudio]
 type = internal/pulseaudio
+interval = 1
 
-format-volume = <label-volume> <bar-volume>
+format-volume = <label-volume>
+label-volume = %percentage%%
+format-volume-prefix = "   "
+label-volume-foreground = #B48EAD
+format-volume-prefix-foreground = #B48EAD
+;label-volume-underline = #B48EAD
+;format-volume-prefix-underline = #B48EAD
 
-label-volume =    %percentage%%
-label-volume-foreground = ${root.foreground}
-
-label-muted = 婢  muted
-label-muted-foreground = #666
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #689d6a
-bar-volume-foreground-1 = #689d6a
-bar-volume-foreground-2 = #689d6a
-bar-volume-foreground-3 = #689d6a
-bar-volume-foreground-4 = #689d6a
-bar-volume-foreground-5 = #fe8019
-bar-volume-foreground-6 = #cc241d
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-
-bar-volume-empty-foreground = ${colors.foreground-alt}
+format-muted = <label-muted>
+label-muted = %percentage%%
+format-muted-prefix = "婢   "
+label-muted-foreground = #BF616A
+format-muted-prefix-foreground = #BF616A
+;label-muted-underline = #BF616A
+;format-muted-prefix-underline = #BF616A
 
 ;[module/alsa]
 ;type = internal/alsa
@@ -467,51 +477,78 @@ label-full-foreground=${colors.light_green}
 ;ramp-foreground = ${colors.foreground-alt}
 
 
-#--------------------------------updates----------------------------
+;------------------------------
+;updates
+;------------------------------
 
-[module/updates-arch]
-type = custom/script
-exec = ~/.config/polybar/scripts/updates-arch.sh
-format = <label>
-format-prefix = "  "
-;format-prefix-foreground = ${colors.foreground}
-format-foreground = #b48ead
-format-prefix-foreground = #b48ead
-label = %output%
-interval = 600
-click-left = alacritty "sudo pacman -Syu" &
+;[module/updates]
+;type = custom/script
+;exec = ~/.config/polybar/scripts/updates-arch.sh
+;format = <label>
+;format-prefix = "  "
+;;format-prefix-foreground = ${colors.foreground}
+;format-foreground = #b48ead
+;format-prefix-foreground = #b48ead
+;label = %output%
+;interval = 600
+;click-left = alacritty "sudo pacman -Syu" &
 
 
-#--------------------------------powermenu----------------------------
+;------------------------------
+;powermenu
+;------------------------------
 
 [module/powermenu]
 type = custom/menu
-
-expand-right = true
+expand = true
 
 format-spacing = 1
+;format-underline = #EBCB8B
 
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
+label-open = "  "
+label-open-font = 4
+label-open-foreground = ${colors.beige}
 
-menu-0-0 = reboot
+label-close = ""
+label-close-font = 4
+label-close-foreground = #EBCB8B
+
+menu-0-0 = "Power off  "
+menu-0-0-foreground = #EBCB8B
 menu-0-0-exec = menu-open-1
-menu-0-1 = power off
+
+menu-0-1 = "Reboot  "
+menu-0-1-foreground = #EBCB8B
 menu-0-1-exec = menu-open-2
 
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
+menu-0-2 = "Log out  "
+menu-0-2-foreground = #EBCB8B
+menu-0-2-exec = menu-open-3
 
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
+menu-0-3 = " ﰸ "
+menu-0-3-foreground = #EBCB8B
+menu-0-3-font = 4
+
+menu-1-0 = "Power off  "
+menu-1-0-exec = systemctl poweroff
+menu-1-0-foreground = #BF616A
+menu-1-1 = "Cancel "
+menu-1-1-exec = menu-open-0
+menu-1-1-foreground = #EBCB8B
+
+menu-2-0 = "Reboot  " 
+menu-2-0-exec = systemctl reboot
+menu-2-0-foreground = #BF616A
+menu-2-1 = "Cancel"
 menu-2-1-exec = menu-open-0
+menu-2-1-foreground = #EBCB8B
+
+menu-3-0 = "Log out  "
+menu-3-0-exec = i3-msg exit
+menu-3-0-foreground = #BF616A
+menu-3-1 = "Cancel"
+menu-3-1-exec = menu-open-0
+menu-3-1-foreground = #EBCB8B
 
 [settings]
 screenchange-reload = true

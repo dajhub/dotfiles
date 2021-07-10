@@ -37,6 +37,12 @@ import os
 import subprocess
 from libqtile import hook
 
+##### STARTUP PROGRAMS #####
+
+@hook.subscribe.startup_once
+def start_once():
+	home = os.path.expanduser("~")
+	subprocess.call([home + "/.config/qtile/autostart.sh"])
 
 #
 #@hook.subscribe.startup_once
@@ -57,10 +63,10 @@ terminal = "alacritty" # original: guess_terminal()
 keys = [
 # Applications    
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([alt], "space", lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi -icon-theme 'Papirus' -show-icons")),
+    Key([alt], "space", lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi")),
     Key([alt], "b", lazy.spawn("firefox")),
-    Key([alt], "n", lazy.spawn("nautilus")),
-    Key([alt], "s", lazy.spawn("subl")),
+    Key([alt], "n", lazy.spawn("thunar")),
+    Key([alt], "s", lazy.spawn("code")),
     
 # Lock Screen
     #Key([mod],"l", lazy.spawn("betterlockscreen -l")),
@@ -113,12 +119,6 @@ keys = [
     Key([mod, "shift"], "f", lazy.window.toggle_floating(), desc='toggle floating'),
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc='toggle fullscreen'),
 
-
-# Move between groups (added by DJ - not working at the moment)
-# cycle to previous group
-    Key([alt], "Left", lazy.group.prevgroup()),
-# cycle to next group
-    Key([alt], "Right", lazy.group.nextgroup()),
     	
 
 # Toggle between different layouts as defined below
@@ -186,7 +186,7 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-        wallpaper='~/Pictures/wallpapers/space-station.png',
+        wallpaper='~/Pictures/wallpapers/conifer-sapling.jpg',
         wallpaper_mode='fill',
         top=bar.Bar(
             [
@@ -306,7 +306,7 @@ screens = [
                 widget.Clock(
                     font="SF Pro Display",
                     fontsize=13,
-                    format="%a  %d/%m/%y   %H : %M",
+                    format="%a  %d %b | %H : %M",
                     foreground="eceff4"
                 ),
                 widget.Sep(
