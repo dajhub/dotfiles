@@ -34,7 +34,8 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+c kill
 
 # start program launcher
-bindsym $mod+d exec rofi -combi-modi drun -font 'Ubuntu Regular 11' -show combi -show-icons
+# bindsym $mod+d exec rofi -combi-modi drun -font 'Ubuntu Regular 11' -show combi -show-icons
+bindsym $mod+d exec rofi -combi-modi drun -font 'Ubuntu Regular 11' -show combi
 
 # launch categorized menu
 #bindsym $mod+' exec --no-startup-id morc_menu
@@ -176,7 +177,7 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # Open applications on specific workspaces
 # assign [class="Thunderbird"] $ws2
 # assign [class="Firefox"] $ws1
-# assign [class="Pcmanfm"] $ws3
+# assign [class="nemo"] $ws2
 
 # Open specific applications in floating mode
 #for_window [title="alsamixer"] floating enable border pixel 1
