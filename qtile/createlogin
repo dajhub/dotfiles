@@ -4,3 +4,6 @@ Comment=Qtile Session
 Exec=qtile start
 Type=Application
 Keywords=wm;tiling
+
+
+temp: --config ~/.config/qtile/picom.conf

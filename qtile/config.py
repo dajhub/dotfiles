@@ -1,29 +1,3 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 from typing import List  # noqa: F401
 
 from libqtile import bar, layout, widget
@@ -54,26 +28,135 @@ def start_once():
 
 mod = "mod4"
 alt = "mod1"
+mod1 = "control"
 terminal = "alacritty" # original: guess_terminal()
 
 #############################################
-############ SHORTCUTS ######################
+############### COLORS ######################
+#############################################
+dracula = [
+   "#282a36",  # 0  Background
+   "#44475a",  # 1  current line/lighter_black
+   "#f8f8f2",  # 2  foreground
+   "#6272a4",  # 3  comment/dark_grey
+   "#8be9fd",  # 4  cyan
+   "#50fa7b",  # 5  green
+   "#bd93f9",  # 6  purple
+   "#ffb86c",  # 7  orange  
+   "#f1fa8c",  # 8  yellow
+   "#ff5555",  # 9  red
+   "#ffffff",  # 10 white 
+   "#6272a4",  # 11 bluish -- dracula
+   "#4A4A4A",  # 12 grey
+   "#A1A1A1",  # 13 light-grey
+]
+
+onedark = [
+   "#282c34", # 0 background
+   "#3f444a", # 1 bg-alt
+   "#bbc2cf", # 2 foreground
+   "#5B6268", # 3 dark grey / comments
+   "#46d9ff", # 4 cyan
+   "#98be65", # 5 green 
+   "#da8548", # 6 orange 
+   "#c678dd", # 7 magenta
+   "#a9a1e1", # 8 violet
+   "#ff6c6b", # 9 red 
+   "#ecbe7b", # 10 yellow 
+   "#ffffff", # 11 white
+   "#4A4A4A", # 12 grey
+   "#A1A1A1", # 13 light-grey
+      ]
+
+palenight = [
+  "#292D3E", # 0 background
+  "#242837", # 1 bg-alt
+  "#EEFFFF", # 2 foreground
+  "#676E95", # 3 dark grey / comments
+  "#80cbc4", # 4 cyan
+  "#c3e88d", # 5 green 
+  "#f78c6c", # 6 orange 
+  "#c792ea", # 7 magenta
+  "#bb80b3", # 8 violet
+  "#ff5370", # 9 red 
+  "#ffcb6b", # 10 yellow 
+  "#ffffff", # 11 white
+  "#4A4A4A", # 12 grey
+  "#A1A1A1", # 13 light-grey
+     ]
+
+gruvbox = [
+  "#282828", # 0 background /dark hard
+  "#242837", # 1 bg-alt
+  "#d5c4a1", # 2 foreground / light 2 / for text
+  "#676E95", # 3 dark grey / comments
+  "#80cbc4", # 4 cyan
+  "#c3e88d", # 5 green 
+  "#f78c6c", # 6 bright_orange
+  "#c792ea", # 7 magenta
+  "#bb80b3", # 8 violet
+  "#ff5370", # 9 red 
+  "#ffcb6b", # 10 yellow 
+  "#ffffff", # 11 white
+  "#4A4A4A", # 12 grey
+  "#A1A1A1", # 13 light-grey
+     ]
+
+nord = [
+  "#2e3440", # 0 background / POLAR JET - changed
+  "#242837", # 1 bg-alt
+  "#88b3b3", # 2 foreground / FROST AQUA / for text
+  "#676E95", # 3 dark grey / comments
+  "#eceff4", # 4 SNOWSTORM SMOKE - changd
+  "#a3be8c", # 5 AURORA GREEN - changed 
+  "#f78c6c", # 6 orange 
+  "#a78ea2", # 7 AURORA PURPLE - changed
+  "#76a9a0", # 8 FROST TEAL
+  "#ff5370", # 9 AURORA RED - change
+  "#ffcb6b", # 10 yellow 
+  "#ffffff", # 11 white
+  "#4A4A4A", # 12 grey
+  "#A1A1A1", # 13 light-grey
+     ]
+
+color = dracula
+
+
+#############################################
+# SHORTCUTS 
 #############################################
 
 keys = [
 # Applications    
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([alt], "space", lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi")),
-    Key([alt], "b", lazy.spawn("firefox")),
-    Key([alt], "n", lazy.spawn("thunar")),
-    Key([alt], "s", lazy.spawn("code")),
+    #Key([alt], "space", lazy.spawn("rofi -combi-modi drun -font 'Noto Sans 11' -show combi")),
+    Key([alt], "b", lazy.spawn("vivaldi-stable")),
+    Key([alt], "n", lazy.spawn("nemo")),
+    Key([alt], "c", lazy.spawn("code")),
+    Key([alt], "s", lazy.spawn("simplenote")),
     
 # Lock Screen
     #Key([mod],"l", lazy.spawn("betterlockscreen -l")),
 
+# Rofi scripts
+    Key([alt], "space", lazy.spawn("rofi -show drun"),
+        desc="Spawn a command using a prompt widget."),
+    Key([alt], "Tab", lazy.spawn("rofi -show window -kb-accept-entry '!Alt-Tab,!Alt+Alt_L' -kb-row-down 'Alt+Tab'"),
+        desc="Switch between windows"),
+    #Key([mod], "v", lazy.spawn("bwmenu"),
+    #    desc="Launch password manager"),
+    #Key([mod], "p", lazy.spawn(powermenu),
+    #    desc="Launch power menu"),
+
+# Rotate through workspaces
+    Key([mod1], "Tab", lazy.screen.next_group()),
+    Key([mod1, "shift" ], "Tab", lazy.screen.prev_group()),
+
+
 ##################################################
-######### MEDIA & BRIGHTNESS CONTROLS ############
+# MEDIA & BRIGHTNESS CONTROLS 
 ##################################################
+
 # Volume
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -D pulse sset Master 2%+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master 2%-")),
@@ -89,16 +172,14 @@ keys = [
 
     
 
-    # Switch between windows in current stack pane
 ###################################################
-################  SWITCH LAYOUT ###################
+# SWITCH BETWEEN WINDOWS IN CURRENT STACK PANE
 ###################################################
 
 
 # Switch between windows
     Key([mod], "Tab", lazy.layout.down(), desc="Move focus down"),
     Key([mod, "shift"], "Tab", lazy.layout.up(), desc="Move focus up"),
-
 
 # Move windows up or down in Monadtall/Layout-Tall
     Key([mod], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -131,10 +212,16 @@ keys = [
 
 
 ###################################################
-####################   LAYOUTS ####################
+# LAYOUTS 
 ###################################################
 
-groups = [Group(i) for i in "12345"]
+groups = [
+	Group("1", label=""),
+	Group("2", label=""),
+	Group("3", label=""),
+	Group("4", label=""),
+	Group("5", label=""),
+]
 
 for i in groups:
     keys.extend([
@@ -142,19 +229,40 @@ for i in groups:
         Key([mod], i.name, lazy.group[i.name].toscreen(),
             desc="Switch to group {}".format(i.name)),
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
+        # mod4 + shift + number of group = switch to & move focused window to group
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
             desc="Switch to & move focused window to group {}".format(i.name)),
         # Or, use below if you prefer not to switch to that group.
         # # mod1 + shift + letter of group = move focused window to group
-        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
-        #     desc="move focused window to group {}".format(i.name)),
+        Key([alt, "shift"], i.name, lazy.window.togroup(i.name),
+             desc="move focused window to group {}".format(i.name)),
     ])
+
+#####
+# Use below when numbering wanted for workspaces instead of circles (as above)
+#####
+
+#groups = [Group(i) for i in "12345"]
+#
+#for i in groups:
+#    keys.extend([
+#        # mod1 + letter of group = switch to group
+#        Key([mod], i.name, lazy.group[i.name].toscreen(),
+#            desc="Switch to group {}".format(i.name)),
+#
+#        # mod1 + shift + letter of group = switch to & move focused window to group
+#        Key([mod, "shift"], i.name, lazy.window.togroup(i.name, switch_group=True),
+#            desc="Switch to & move focused window to group {}".format(i.name)),
+#        # Or, use below if you prefer not to switch to that group.
+#        # # mod1 + shift + letter of group = move focused window to group
+#        # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+#        #     desc="move focused window to group {}".format(i.name)),
+#    ])
 
 layout_theme = {"border_width":1,
 "margin":3,
-"border_focus": "A3BE8C",
-"border_normal":"81a1c1"}
+"border_focus": color[6],
+"border_normal":color[12]}
 
 layouts = [
     #layout.Columns(border_focus_stack='#d75f5f'),
@@ -162,7 +270,7 @@ layouts = [
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
-    layout.Matrix(**layout_theme),
+    # layout.Matrix(**layout_theme),
     layout.MonadTall(**layout_theme),
     # layout.MonadWide(),
     # layout.RatioTile(),
@@ -174,82 +282,124 @@ layouts = [
 ]
 
 ###################################################
-##############  WIDGETS & SCREENS #################
+# WIDGETS & SCREENS 
 ###################################################
 
 widget_defaults = dict(
-    font='sans',
-    fontsize=10,
+    font="FiraCode Nerd Font Medium",
+    fontsize=14,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
 
+
+#####
+# Use below when using numbers for workspaces and comment out above
+#####
+
+#widget_defaults = dict(
+#    font='sans',
+#    fontsize=10,
+#    padding=3,
+#)
+#extension_defaults = widget_defaults.copy()
+
 screens = [
     Screen(
-        wallpaper='~/Pictures/wallpapers/conifer-sapling.jpg',
+        wallpaper='~/Pictures/wallpapers/space-station.png',
         wallpaper_mode='fill',
         top=bar.Bar(
             [
-                widget.CurrentLayoutIcon(
-                    custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
-                    scale = 0.7,
-                    padding = 5
-                ),
-
+                # GroupBox
+                widget.Spacer(10),
                 widget.GroupBox(
-                    font="SF Pro Display",
-                    fontsize=12,
-                    highlight_method="line", # could also be 'block'
-                    #highlight_color="2e3440",
-                    highlight_color = ['#202020', '#343434'],
-                    rounded=False,
-                    padding_x=5,
-                    padding_y=5,
-                    active="#ffffff",
-                    inactive="#959595",
-                    this_current_screen_border="5e81ac",
-                    urgent_border="bf616a",
-                    disable_drag=True
+                    fontsize=14,
+                    padding=3,
+                    block_highlight_text_color=color[6],
+                    active=color[11],
+                    inactive=color[12],
+                    borderwidth=0,
                 ),
-                widget.Sep(
-                    linewidth=0,
-                    padding=10
-                ),
-                widget.Prompt(
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="38FC55"
-                ),
+                widget.Spacer(10),
+
+                # Layout
                 widget.TextBox(
-                    text=" ",
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="88c0d0"
+                    text="", padding=6, fontsize=14, foreground=color[13]
+                ),
+                widget.CurrentLayout(
+                    foreground=color[13], font="Ubuntu regular", fontsize=12),
+                widget.Spacer(10),
+
+                # WindowName
+                # widget.WindowName(
+                #     format="|{state} {name}", max_chars=80, foreground=colors["white"]
+                # ),
+                # widget.TextBox(text="|", fontsize=16,
+                #                foreground=colors["white"]),
+                #widget.TaskList(foreground=color[11], icon_size=20, padding=5,
+                #                font="FiraCode Nerd Font", fontsize=14, borderwidth=0,
+                #                markup_focused='<span weight="bold">{}</span>'),
+            ######
+            #    widget.CurrentLayoutIcon(
+            #        custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
+            #        scale = 0.7,
+            #        padding = 5
+            #    ),
+#
+            #    widget.GroupBox(
+            #        font="Ubuntu Regular",
+            #        fontsize=12,
+            #        highlight_method="line", # could also be 'block'
+            #        #highlight_color="2e3440",
+            #        highlight_color = ['#202020', '#343434'],
+            #        rounded=False,
+            #        padding_x=5,
+            #        padding_y=5,
+            #        active="#ffffff",
+            #        inactive="#959595",
+            #        this_current_screen_border="5e81ac",
+            #        urgent_border=color[9],
+            #        disable_drag=True
+            #    ),
+            #    widget.Sep(
+            #        linewidth=0,
+            #        padding=10
+            #    ),
+            #    widget.Prompt(
+            #        font="Ubuntu regular",
+            #        fontsize=12,
+            #        foreground=color[5]
+            #    ),
+                widget.TextBox(
+                    text=">> ",
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[2]
                 ),
                 widget.WindowName(
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="88c0d0",
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[2],
                     max_chars=70
                 ),
                 widget.Systray(),
 #                widget.TextBox(
 #                    text="",
-#                    font="SF Pro Display",
-#                    fontsize=13,
+#                    font="Ubuntu regular",
+#                    fontsize=12,
 #                    foreground="bf616a"
 #                 ),
 #                widget.CPU(
-#                    font="SF Pro Display",
-#                    fontsize=13,
+#                    font="Ubuntu regular",
+#                    fontsize=12,
 #                    foreground="eceff4",
 #                    format="CPU {load_percent}%"
 #                ),
                     widget.TextBox(
                     text="    ⟳",
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="d08770"
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[6]
                 ),
 
                 widget.CheckUpdates(
@@ -257,57 +407,57 @@ screens = [
                     display_format = "{updates} Updates",
                     no_update_string = '0 Updates',
                     restart_indicator = 'Checking...',
-                    font="SF Pro Display",
-                    fontsize=13,
-                    #foreground = "88c0d0",
-                    colour_have_updates = "d08770",
-                    #colour_no_updates = "d08770",
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground = color[2],
+                    colour_have_updates = color[9],
+                    colour_no_updates = color[2],
                     update_interval = 3000
                  ),
 
                 widget.TextBox(
                     text="    ",
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="a3be8c"
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[5]
                 ),
                 widget.Memory(
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="eceff4",
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[2],
                     format="{MemUsed: } /{MemTotal: } MB"
                 ),
                 widget.TextBox(
                     text="    ",
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="88c0d0"
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[11]
                 ),
                 widget.PulseVolume(
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="eceff4"
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[2]
                 ),
                 widget.Battery(
-                    font="SF Pro Display",
-                    fontsize=13,
+                    font="Ubuntu regular",
+                    fontsize=12,
                     charge_char='     ',
                     discharge_char="     ",
                     full_char='     ',
                     format="{char} {percent:2.0%}",
-                    foreground="eceff4"
+                    foreground=color[2]
                 ),
                 widget.TextBox(
                     text="     ",
-                    font="SF Pro Display",
-                    fontsize=13,
-                    foreground="b48ead"
+                    font="Ubuntu regular",
+                    fontsize=12,
+                    foreground=color[7]
                 ),
                 widget.Clock(
-                    font="SF Pro Display",
-                    fontsize=13,
+                    font="Ubuntu regular",
+                    fontsize=12,
                     format="%a  %d %b | %H : %M",
-                    foreground="eceff4"
+                    foreground=color[2]
                 ),
                 widget.Sep(
                     linewidth=0,
@@ -315,7 +465,7 @@ screens = [
                 )
             ],
             28,
-            background = "#2e3440",
+            background = color[0],
             opacity = 1
         ),
     ),
