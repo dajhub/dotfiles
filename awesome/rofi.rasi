@@ -1,0 +1,190 @@
+/* global settings and color variables */
+configuration {
+    show-icons: false;
+    font: "Noto Sans 10";
+    display-drun: "➛";
+    timeout {
+        delay: 10;
+        action: "kb-cancel";
+    }
+    terminal: "alacritty";
+}
+
+* {
+  white:            #cccccc;
+  black:            #000000;
+  blue:             #a6e1ff;
+  darkblue:         #B48EAD;
+  cyan:             #95e6cb;
+  lightcyan:        #11d1a1;
+  green:            #33bd91;
+  red:              #ff6666;
+
+  dark1:            #1F243050;
+  dark2:            #1F243070;
+
+  //accent:           #C0A0FF;
+  accent:           #a6e1ff;
+
+  background-color: @dark2;
+  background-alt:   @dark1;
+  border-color:     @dark2;
+  text-color:       @white;
+  dark-text-color:  @black;
+  main-color:       @white;
+  highlight:        @accent;
+  urgent-color:     @red;
+  selected-color:   @accent;
+}
+
+window {
+  background-color: @background-alt;
+  width:            25%;
+  height:           508px;
+  fullscreen:       false;
+  border:           none;
+  //border-radius:    0 0 7.5px 7.5px;
+  border-radius:    0 0 0 0;
+  //padding:          0 0 10px 0;
+  padding:          0 0 0 0;
+  border-color:     @border-color;
+}
+
+mainbox {
+  background-color: @background-color;
+  spacing:          0px;
+}
+
+message {
+  background-color: @background-color;
+}
+
+textbox {
+  text-color:       @text-color;
+  background-color: @background-color;
+}
+
+listview {
+  fixed-height:     true;
+  dynamic:          true;
+  scrollbar:        false;
+  //spacing:          5px;
+  spacing:          1px;
+  //padding:          1px 0px 0px 0px;
+  padding:          1px 0px 0px 0px;
+  margin:           0px 0px 0px 0px;
+  background:       @background-color;
+  text-color:       @text-color;
+}
+
+element {
+  //border-radius:    3px;
+  border-radius:    0px;
+  //padding:          10px;
+  padding:          1px;
+  margin:           1px 3px 0 3px;
+}
+
+element normal.normal {
+  padding:          25px 15px;
+  background-color: @background-color;
+  text-color:       @text-color;
+}
+
+element normal.urgent {
+  background-color: @background-color;
+  text-color:       @urgent-color;
+}
+
+element normal.active {
+  background-color: @background-color;
+  text-color:       @main-color;
+}
+
+element selected.normal {
+  background-color: @selected-color;
+  text-color:       @black;
+}
+
+element selected.urgent {
+  background-color: @urgent-color;
+  text-color:       @dark-text-color;
+}
+
+element selected.active {
+  background-color: @selected-color;
+  text-color:       @black;
+}
+
+element alternate.normal {
+  background-color: @background-color;
+  text-color:       @text-color;
+}
+
+element alternate.urgent {
+  background-color: @background-color;
+  text-color:       @urgent-color;
+}
+
+element alternate.active {
+  background-color: @background-color;
+  text-color:       @main-color;
+}
+
+element-text {
+    font: "Noto Sans 10";
+    color: inherit;
+    padding: 0 0 0 3px;
+    //horizontal-align: 0.5;
+}
+
+scrollbar {
+  background-color: @background-color;
+  handle-color:     @background-color;
+  handle-width:     0px;
+}
+
+mode-switcher {
+  background-color: @background-color;
+}
+
+button {
+  background-color: @background-color;
+  text-color:       @text-color;
+}
+
+button selected {
+  text-color:       @main-color;
+}
+
+inputbar {
+  background-color: @background-color;
+  spacing:          0px;
+  children:         [ prompt,entry,case-indicator ];
+}
+
+prompt {
+  padding:          1px 5px;
+  background-color: @background-alt;
+  text-color:       @highlight;
+}
+
+entry {
+  padding:          1px;
+  background-color: @background-alt;
+  text-color:       @text-color;
+}
+
+case-indicator {
+  padding:          1px;
+  text-color:       @main-color;
+  background-color: @background-alt;
+}
+
+#textbox-prompt-colon {
+  padding:          1px;
+  expand:           false;
+  str:              "->";
+  text-color:       @highlight;
+  background-color: @background-alt;
+}

@@ -1,0 +1,139 @@
+/**
+ * David
+ */
+
+/**
+*configuration {
+*
+*    font: "JetBrains Mono 10";
+*    width: 40;
+*    line-margin: 10;
+*    lines: 6;
+*    columns: 2;
+*
+*    display-ssh:    "";
+*    display-run:    "";
+*    display-drun:   ">>";
+*    display-window: "";
+*    display-combi:  "";
+*    show-icons:     false;
+*
+*}
+*/
+
+/**
+* element-icon {
+*    size:             1.1em ;
+*}
+*/
+
+
+
+* {
+    nord0: #2e3440;
+    nord6: #eceff4;
+    green: #17947C;
+ 
+    foreground:  @green;
+    backlight:   #ccffeedd;
+    background-color:  transparent;
+
+    width: 450;
+    line-margin: 10;
+    lines: 8;
+
+    font: "JetBrains Mono 10";
+    
+    highlight:     underline bold #eceff4;
+
+    transparent: rgba(46,52,64,0);
+}
+
+window {
+    location: center;
+    anchor:   center;
+    transparency: "screenshot";
+    padding: 0px;
+    border:  0px;
+    border-radius: 0px;
+
+    background-color: @transparent;
+    spacing: 0;
+    children:  [mainbox];
+    orientation: horizontal;
+}
+
+mainbox {
+    spacing: 0;
+    children: [ inputbar, message, listview ];
+}
+
+message {
+    color: @nord0;
+    padding: 5;
+    border-color: @foreground;
+    border:  0px 0px 0px 0px;
+    background-color: @green;
+}
+
+inputbar {
+    color: @nord6;
+    padding: 11px;
+    background-color: #3b4252;
+
+    border: 0px;
+    border-radius:  0px 0px 0px 0px;
+    border-color: @green;
+}
+
+entry, prompt, case-indicator {
+    text-font: inherit;
+    text-color:inherit;
+}
+
+prompt {
+    margin: 0px 0.3em 0em 0em ;
+}
+
+listview {
+    padding: 8px;
+    border-radius: 0px 0px 0px 0px;
+    border-color: @green;
+    border: 0px 0px 0px 0px;
+    background-color: rgba(46,52,64,0.9);
+    dynamic: false;
+}
+
+element {
+    padding: 3px;
+    vertical-align: 0.5;
+    border-radius: 0px;
+    background-color: transparent;
+    color: @foreground;
+    text-color: rgb(216, 222, 233);
+}
+
+element selected.normal {
+    background-color: @green;
+    text-color: #2e3440;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+button {
+    padding: 6px;
+    color: @foreground;
+    horizontal-align: 0.5;
+ 
+    border: 0px 0px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
+    border-color: @foreground;
+}
+
+button selected normal {
+    border: 0px 0px 0px 0px;
+    border-color: @foreground;
+}
