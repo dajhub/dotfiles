@@ -8,7 +8,7 @@ require("awful.hotkeys_popup.keys")
 modkey = "Mod4"
 altkey = "Mod1"
 
-launcher = "rofi -normal-window -show drun -modi drun,ssh -theme /home/david/.config/awesome/rofi.rasi"
+launcher = "rofi -show drun -theme /home/david/.config/rofi/config.rasi"
 screenshot = "flameshot screen -p '/home/david/Pictures/screenshots/'"
 screenshot_selection = "flameshot gui -d 1000 -p ~/Pictures/screenshots/"
 
@@ -100,11 +100,11 @@ local globalkeys = gears.table.join(
     -- Group: Launcher
     awful.key({ modkey,           }, "Return", function () awful.spawn("kitty") end,
               {description = "open a terminal", group = "launcher"}),
-    awful.key({ modkey,           }, "d",      function () awful.spawn(launcher)    end,
+    awful.key({ altkey,           }, "r",      function () awful.spawn(launcher)    end,
               {description = "application launcher", group = "launcher"}),
-    awful.key({ modkey,           }, "w",      function () awful.spawn("firefox")     end,
+    awful.key({ altkey,           }, "w",      function () awful.spawn("librewolf")     end,
               {description = "browser", group = "launcher"}),
-    awful.key({ modkey,           }, "e",      function () awful.spawn("nemo")    end,
+    awful.key({ altkey,           }, "e",      function () awful.spawn("nemo")    end,
               {description = "file manager", group = "launcher"}),
     awful.key({                   }, "Print",
         function ()

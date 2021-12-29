@@ -125,6 +125,7 @@ local calendar = wibox.widget.textclock(
 --	widget:set_markup('<span color="'..theme.clr.blue..'" font="'..theme.widget_font..'"> ' ..stdout.."%</span> ")
 --end)
 
+
 -- CPU
 --local cpuicon = wibox.widget.textbox(
 --	string.format('<span color="%s" font="'..theme.icon_font..'"> </span>', theme.clr.pink)
@@ -287,10 +288,10 @@ end)
 lo = awful.layout.layouts
 my_tags = {
         tags = {
-        { names =  { "  ", "  ", "  ", "  ", "  " },
+        { names =  { "", "", "", "", "" },
           layout = { lo[1], lo[1], lo[1], lo[1], lo[3] },
         },
-        { names =  { "  ", "  ", "  ", "  ", " 漣" },
+        { names =  { "  ", "  ", "  ", "  ", " " },
           layout = { lo[2], lo[1], lo[1], lo[1], lo[1] },
         },
     }

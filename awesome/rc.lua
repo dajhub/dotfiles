@@ -39,6 +39,7 @@ awful.spawn.with_shell([[
     nm-applet &
     thunar --daemon &
     xset r rate 460 35 &
+    setxkbmap -model pc105 -layout gb & 
     xset s 300 5 &
     xss-lock -n /usr/lib/xsecurelock/dimmer -l -- ~/.config/awesome/xsecurelock.sh &
 ]])

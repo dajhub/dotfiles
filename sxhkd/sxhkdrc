@@ -52,12 +52,12 @@ super + shift + N
 # quit/restart bspwm
 super + shift + {q,r}
 	bspc {quit,wm -r}
-	
+
 #super + shift + {p,r}
 #	bspc {quit,wm -r | killall polybar | polybar mybar &}
 
 # close and kill
-ctrl + {_,shift + }q
+super + {_,shift + }w
 	bspc node -{k,c}
 
 # alternate between the tiled and monocle layout
