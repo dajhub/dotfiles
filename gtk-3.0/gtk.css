@@ -1,0 +1,22 @@
+.xfce4-panel {
+   font-family: "Sans Regular";
+   font-size: 12px;
+}
+
+/*      Workspace Switcher Buttons      */
+
+.xfce4-panel widget grid button.flat.toggle
+{
+color: white;
+min-width: 24px;
+border-style: blue;
+}
+
+.xfce4-panel widget grid button.flat.toggle:hover,
+.xfce4-panel widget grid button.flat.toggle:checked
+{
+color: #b48ead;
+background-color: #4c566a;
+font-weight: bold;
+border-radius: 6px;
+}
