@@ -2,7 +2,6 @@
  * ROFI configs i3 Apps menu for EndeavourOS
  * Maintainer: joekamprad <joekamprad@endeavouros.com>
  *******************************************************/
-
 configuration {
     font:				"Sourcecode Pro Regular 10";
     show-icons:				true;

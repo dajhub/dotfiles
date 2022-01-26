@@ -1,17 +1,18 @@
 /*******************************************************
- * ROFI configs i3 Apps menu for EndeavourOS
+ * ROFI configs i3 keyhint-menu for EndeavourOS
  * Maintainer: joekamprad <joekamprad@endeavouros.com>
  *******************************************************/
-
 configuration {
-    font:				"Sourcecode Pro Regular 10";
-    show-icons:				true;
-    icon-theme:				"Arc-X-D";
-    display-drun:			"Apps";
-    drun-display-format:		"{name}";
-    scroll-method:			0;
-    disable-history:			false;
-    sidebar-mode:			false;
+    font:                           "Sourcecode Pro Regular 10";
+    show-icons:                     false;
+	icon-theme: 					"Arc-X-D";
+    display-drun: 					"KeyHint";
+    drun-display-format:            "{name}";
+    scroll-method:                  0;
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
 }
 
 @import "~/.config/rofi/arc_dark_transparent_colors.rasi"
@@ -23,7 +24,7 @@ window {
 }
 listview {
     lines:                          10;
-    columns:                        3;
+    columns:                        1;
 }
 mainbox {
     border:  0;
