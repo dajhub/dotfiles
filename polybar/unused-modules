@@ -1,0 +1,201 @@
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground}
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Set font
+label-focused-font = 4
+label-unfocused-font = 4
+label-visible-font = 4
+label-urgent-font = 4
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 1
+label-mode-foreground = #dddddd
+label-mode-background = ${colors.primary}
+label-mode-font = 6
+
+; focused = Active workspace on focused monitor
+label-focused = 
+label-focused-background = ${colors.foreground}
+label-focused-underline= ${colors.background}
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = 
+label-unfocused-padding = 1
+label-unfocused-background = #c7c7c7
+label-unfocused-foreground = ${colors.background}
+label-unfocused-underline = #8B8B8B
+
+; visible = Active wowrkspace on unfocused monitor
+label-visible = 
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = 
+label-urgent-background = ${colors.background}
+label-urgent-underline = ${colors.foregound}
+label-urgent-padding = 1
+
+; Separator in beteen workspaces
+; label-separator = -
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+;[module/pacman-updates]
+;type = custom/script
+;;exec = pacman -Qu | wc -l
+;exec = checkupdates | wc -l
+;interval = 1000
+;label = Updates:%output%
+;format-foreground = #26233A
+;#format-underline = #FFFFD3
+;format-background = #31748f
+;format-prefix = " "
+;format-padding = 1
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+;[module/backlight]
+;type = internal/xbacklight
+;
+;; Use the following command to list available cards:
+;; $ ls -1 /sys/class/backlight/
+;card = intel_backlight
+;
+;format = <ramp> <label>
+;format-background = ${color.yellow}
+;
+;label = %percentage%%
+;label-foreground = ${color.background}
+;
+;ramp-0 = " "
+;ramp-1 = " "
+;ramp-2 = " "
+;ramp-3 = " "
+;ramp-4 = " "
+;ramp-5 = " "
+;ramp-6 = " "
+;ramp-7 = " "
+;ramp-8 = " "
+;ramp-9 = " "
+;ramp-font = 2
+;ramp-foreground = ${color.background}
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/brightness]
+type = internal/backlight
+
+; Use the following command to list available cards:
+; $ ls -1 /sys/class/brightness/
+card = intel_backlight
+
+enable-scroll = true
+
+format = <ramp> <label>
+format-background = ${color.BACKGROUND}
+format-padding = 2
+
+label = %percentage%%
+label-foreground = ${color.background}
+
+ramp-0 = " "
+ramp-1 = " "
+ramp-2 = " "
+ramp-3 = " "
+ramp-4 = " "
+ramp-5 = " "
+ramp-6 = " "
+ramp-7 = " "
+ramp-8 = " "
+ramp-9 = " "
+ramp-font = 2
+ramp-foreground = ${color.FOREGROUND}
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+;[module/memory]
+;type = internal/memory
+;
+;interval = 1
+;
+;format = <label>
+;format-prefix = 
+;format-prefix-font = 3
+;format-padding = 0
+;format-foreground = ${color.cyan}
+;format-background = ${color.shade}
+;
+;label = " %gb_used% "
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format = <label>
+
+format-prefix = ""
+format-prefix-foreground = #93A83D
+
+format-foreground = #93A83D
+format-padding = 1
+
+label = %percentage:2%%
+label-padding-left = 1
+label-font = 0
+
+;_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
+format-prefix-underline = ${colors.background}
+
+label-layout = %layout%
+label-layout-underline = ${colors.background}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.background}
+label-indicator-underline = ${colors.background}
+
+
+

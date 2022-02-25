@@ -1,8 +1,13 @@
 #! /bin/sh
 
-pgrep -x sxhkd > /dev/null || sxhkd &
+killall sxhkd; sxhkd &
 
-bspc monitor -d I II III IV V VI
+## Configurations --------------------------------------------#
+
+# for use with circle icons:
+# bspc monitor -d I II III IV V VI
+bspc monitor -d '' '' '' '' '' ''
+
 
 bspc config border_width         2
 bspc config window_gap           2
@@ -18,12 +23,47 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      false
 
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a LibreWolf desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
+## Window rules ----------------------------------------------#
+
+# bspc rule -a mplayer2 state=floating
+# bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
 bspc rule -a Gpick state=floating
+
+# 1 > terminal
+bspc rule -a kitty desktop='^1' follow=on focus=on
+bspc rule -a Xfce4-terminal desktop='^1' follow=on focus=on
+
+# 2 > web
+bspc rule -a Firefox desktop='^2' follow=on focus=on
+
+# 3 > files
+declare -a files=(Pcmanfm Thunar qBittorrent)
+for i in ${files[@]}; do
+   bspc rule -a $i desktop='^3' follow=on focus=on; done
+
+# 4 > code
+declare -a code=(Geany code-oss)
+for i in ${code[@]}; do
+   bspc rule -a $i desktop='^4' follow=on focus=on; done
+   
+# 5 > office and docs
+declare -a office=(Gucharmap Atril Evince \
+libreoffice-writer libreoffice-calc libreoffice-impress \
+libreoffice-startcenter libreoffice Soffice *:libreofficedev *:soffice)
+for i in ${office[@]}; do
+   bspc rule -a $i desktop='^5' follow=on focus=on; done
+   
+# 6 > settings
+bspc rule -a "Virt-manager" desktop='^6' follow=on focus=on
+bspc rule -a GParted desktop='^6' follow=on focus=on
+declare -a settings=(Lxappearance Lxtask Lxrandr Arandr \
+System-config-printer.py Pavucontrol Exo-helper-1 \
+Xfce4-power-manager-settings)
+for i in ${settings[@]}; do
+   bspc rule -a $i desktop='^6' state=floating follow=on focus=on; done
+
+## Autostart -------------------------------------------------#
 
 # Set cursor theme
 xsetroot -cursor_name left_ptr
@@ -34,7 +74,7 @@ killall polybar ; polybar mybar &
 #killall picom ; picom  --vsync --backend glx -CGb -o 0 -i 1 --unredir-if-possible --glx-no-stencil -D 8 --glx-no-rebind-pixmap -m 100 &
 killall picom ; picom -b &
 # Background
-killall feh ; feh --bg-fill ~/Pictures/wallpapers/arch.png &
+killall feh ; feh --bg-fill ~/Pictures/wallpapers/Gruv/leaves.jpg &
 setxkbmap -model pc105 -layout gb &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 # Night light
