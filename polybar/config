@@ -20,7 +20,8 @@ include-file = ~/.config/polybar/colors
 include-file = ~/.config/polybar/modules
 
 [colors]
-background = ${xrdb:background:#aa434C5E}
+; background = ${xrdb:background:#aa434C5E}
+background = ${xrdb:background:#444444}
 foreground = ${xrdb:nord6:#ECEFF4}
 nord6 = ${xrdb:nord6:ECEFF4}
 nord4 = ${xrdb:nord4:ECEFF4}

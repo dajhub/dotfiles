@@ -2,6 +2,16 @@
 
 killall sxhkd; sxhkd &
 
+# Polybar
+killall polybar ; polybar mybar &
+# Picom
+#killall picom ; picom  --vsync --backend glx -CGb -o 0 -i 1 --unredir-if-possible --glx-no-stencil -D 8 --glx-no-rebind-pixmap -m 100 &
+killall picom ; picom -b &
+# Background
+killall feh ; feh --bg-fill ~/dotfiles/wallpapers/Gruv/gruv-4.jpg &
+setxkbmap -model pc105 -layout gb &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
 ## Configurations --------------------------------------------#
 
 # for use with circle icons:
@@ -35,10 +45,10 @@ bspc rule -a kitty desktop='^1' follow=on focus=on
 bspc rule -a Xfce4-terminal desktop='^1' follow=on focus=on
 
 # 2 > web
-bspc rule -a Firefox desktop='^2' follow=on focus=on
+bspc rule -a Librewolf desktop='^2' follow=on focus=on
 
 # 3 > files
-declare -a files=(Pcmanfm Thunar qBittorrent)
+declare -a files=(pcmanfm Thunar qBittorrent)
 for i in ${files[@]}; do
    bspc rule -a $i desktop='^3' follow=on focus=on; done
 
@@ -68,15 +78,7 @@ for i in ${settings[@]}; do
 # Set cursor theme
 xsetroot -cursor_name left_ptr
 
-# Polybar
-killall polybar ; polybar mybar &
-# Picom
-#killall picom ; picom  --vsync --backend glx -CGb -o 0 -i 1 --unredir-if-possible --glx-no-stencil -D 8 --glx-no-rebind-pixmap -m 100 &
-killall picom ; picom -b &
-# Background
-killall feh ; feh --bg-fill ~/Pictures/wallpapers/Gruv/leaves.jpg &
-setxkbmap -model pc105 -layout gb &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
 # Night light
 # killall redshift ; killall redshift ; redshift -l 14.599512:120.984222 &
 # Remap control key and caps lock

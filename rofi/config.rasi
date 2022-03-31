@@ -14,8 +14,12 @@ configuration {
     sidebar-mode:			false;
 }
 
-@import "~/.config/rofi/arc_dark_transparent_colors.rasi"
+/********************************************************
+ * @import "~/.config/rofi/arc_dark_transparent_colors.rasi"
+ ********************************************************/
 
+@import "~/.config/rofi/zenburn.rasi"
+ 
 window {
     background-color: @background;
     border:           0;
@@ -39,7 +43,7 @@ textbox {
 }
 listview {
     fixed-height: 0;
-    border:       8px 0px 0px ;
+    border:       2px 0px 0px ;
     border-color: @separatorcolor;
     spacing:      8px ;
     scrollbar:    false;
